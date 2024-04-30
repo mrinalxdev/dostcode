@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/select";
 import CourseItem from "./CourseItem";
 
-
 const CourseList = () => {
   const [courseList, setCourseList] = useState([]);
 
@@ -45,11 +44,18 @@ const CourseList = () => {
       </div>
 
       <div>
-        {courseList.map((item, index) => (
-            <div key={index} className="m-4 grid gap-5">
+        {courseList?.length > 0
+          ? courseList.map((item, index) => (
+              <div key={index} className="m-2 grid grid-cols-2  gap-5">
                 <CourseItem course={item} />
-            </div>
-        ))}
+              </div>
+            ))
+          : [1, 2, 3, 4, 5, 6, 7].map((item, index) => {
+              <div
+                key={index}
+                className="w-full h-[240px] rounded-xl bg-white m-6 animate-pulse"
+              ></div>;
+            })}
       </div>
     </div>
   );

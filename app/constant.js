@@ -4,16 +4,19 @@ export const menu = [
     {
         id : 1, 
         name : "All Courses",
-        icon : BookOpen
+        icon : BookOpen,
+        path : "/courses"
     },
     {
         id : 2,
         name : "Membership",
-        icon : BadgeIcon
+        icon : BadgeIcon,
+        path : '/member'
     },
     {
         id : 3,
         name : "Contribute",
-        icon : GraduationCap
+        icon : GraduationCap,
+        path : '/contribute'
     }
 ]

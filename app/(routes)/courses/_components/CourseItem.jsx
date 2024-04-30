@@ -7,7 +7,7 @@ const CourseItem = ({ course }) => {
     <div className="border rounded-xl hover:shadow-md cursor-pointer">
       <Image
         src={course?.banner.url}
-        width={770}
+        width={700}
         height={150}
         className="rounded-t-xl"
       />
