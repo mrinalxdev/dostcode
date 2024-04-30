@@ -1,11 +1,11 @@
-const { gql } = require("graphql-request")
+const { gql, default: request } = require("graphql-request")
 
-const MASTER_URL = "https://api-ap-south-1.hygraph.com/v2/"+process.env.NEXT_PUBLIC_HYGRAPH_API_KEY+"/master"
+const MASTER_URL = "https://api-ap-south-1.hygraph.com/v2/"+process.env.NEXT_PUBLIC_HYGRAPH_API_KEY+"/master";
 
 const getAllCourseList = async () => {
     const query = gql`
     query MyQuery {
-        courseLists {
+        courseLists(first: 1000, orderBy: createdAt_DESC) {
           slug
           name
           id
@@ -26,7 +26,7 @@ const getAllCourseList = async () => {
       }
     `
 
-    const result = await req(MASTER_URL, query);
+    const result = await request(MASTER_URL, query);
     return result;
 }
 
