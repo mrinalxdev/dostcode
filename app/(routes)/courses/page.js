@@ -1,6 +1,7 @@
 import React from 'react'
 import WeolcomeBanner from './_components/WeolcomeBanner'
 import CourseList from './_components/CourseList'
+import SideBanner from './_components/SideBanner'
 
 const Courses = () => {
   return (
@@ -11,7 +12,7 @@ const Courses = () => {
         <CourseList />
       </div>
       <div>
-        Right Section
+        <SideBanner />
       </div>
     </div>
   )
