@@ -20,7 +20,11 @@ const CourseContent = ({ courseInfo }) => {
             }`}
           >
             {index + 1}. {item.name}{" "}
-            {activeIndex === index ? <Play className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
+            {activeIndex === index ? (
+              <Play className="h-4 w-4" />
+            ) : (
+              <Lock className="h-4 w-4" />
+            )}
           </h2>
         </div>
       ))}

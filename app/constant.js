@@ -1,4 +1,6 @@
-import { BadgeIcon, BookOpen, GraduationCap } from "lucide-react";
+import { BadgeIcon, BookOpen, GraduationCap, User } from "lucide-react";
+
+
 
 export const menu = [
     {
@@ -18,5 +20,13 @@ export const menu = [
         name : "Contribute",
         icon : GraduationCap,
         path : '/contribute'
+    },
+    {
+        if : 4,
+        name : "Dashboard",
+        icon : User,
+        path : '/dashboard',
+        auth : user,
     }
 ]
+
