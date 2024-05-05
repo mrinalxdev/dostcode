@@ -7,13 +7,15 @@ import CourseContent from './_components/CourseContent'
 
 const CoursePreview = ({params}) => {
     const [courseInfo, setCourseInfo] = useState();
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         params && getCourseInfoById();
     },[params])
 
     const getCourseInfoById = () => {
         GlobalApi.getCourseById(params?.courseId).then(resp => {
-            setCourseInfo(resp.courseList)
+            setCourseInfo(resp?.courseList)
+            setLoading(false)
         })
     }
   return (
@@ -25,9 +27,13 @@ const CoursePreview = ({params}) => {
 
         {/* Course COntent */}
         <div>
-            <CourseEnroll />
-            <CourseContent courseInfo={courseInfo} />
-        </div>
+                {!loading && (
+                    <>
+                        <CourseEnroll courseInfo={courseInfo} />
+                        <CourseContent courseInfo={courseInfo} />
+                    </>
+                )}
+            </div>
     </div>
   )
 }
