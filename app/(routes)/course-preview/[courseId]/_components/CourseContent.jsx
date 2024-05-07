@@ -1,5 +1,6 @@
 "use client";
 import { Lock, Play } from "lucide-react";
+import { comment } from "postcss";
 import React, { useState } from "react";
 
 const CourseContent = ({
@@ -29,8 +30,8 @@ const CourseContent = ({
             }
             ${isUserAlreadyEnrolled && "hover:bg-black hover:text-white"}
             ${
-              checkIsChapterCompleted(item.id) && watchMode 
-            } && "border-green-600 bg-green-200"`}
+              checkIsChapterCompleted(item.id) && watchMode && "border-green-600 bg-green-200"
+            }`}
             onClick={() => {
               watchMode && setActiveChapterIndex(index);
               watchMode && setActiveIndex(index);
