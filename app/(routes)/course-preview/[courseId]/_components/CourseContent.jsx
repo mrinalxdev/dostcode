@@ -12,7 +12,11 @@ const CourseContent = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const checkIsChapterCompleted = (chapterId) => {
-    return completedCourse.find(item => item.chapterId == chapterId)
+    if (typeof completedCourse == "undefined") {
+      console.log(completedCourse)
+    } else {
+      return [completedCourse].find(item => item.chapterId == chapterId)
+    }
   };
 
   if (!courseInfo || !courseInfo.chapter) {
@@ -25,13 +29,11 @@ const CourseContent = ({
       {courseInfo.chapter.map((item, index) => (
         <div key={index}>
           <h2
-            className={`p-2 text-[14px] flex justify-between items-center border rounded-sm px-3 m-2 cursor-pointer hover:shadow-xl ease-linear transition-all duration-100 ${
-              activeIndex === index && "bg-black text-white"
-            }
+            className={`p-2 text-[14px] flex justify-between items-center border rounded-sm px-3 m-2 cursor-pointer hover:shadow-xl ease-linear transition-all duration-100 ${activeIndex === index && "bg-black text-white"
+              }
             ${isUserAlreadyEnrolled && "hover:bg-black hover:text-white"}
-            ${
-              checkIsChapterCompleted(item.id) && watchMode && "border-green-600 bg-green-200"
-            }`}
+            ${checkIsChapterCompleted(item.id) && watchMode && "border-green-600 bg-green-200"
+              }`}
             onClick={() => {
               watchMode && setActiveChapterIndex(index);
               watchMode && setActiveIndex(index);
