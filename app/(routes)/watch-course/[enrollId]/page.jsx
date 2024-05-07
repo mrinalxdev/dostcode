@@ -31,6 +31,7 @@ const WatchCourse = ({ params }) => {
       console.log(resp);
       if (resp) {
         toast("Chapter Marked as Completed");
+        getUserEnrollCourseDetail();
       }
     });
   };
