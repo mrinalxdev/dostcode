@@ -1,7 +1,13 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
 import Markdown from "react-markdown";
 
-const CourseDesc = ({ courseInfo, activeChapterIndex, watchMode = false }) => {
+const CourseDesc = ({
+  courseInfo,
+  activeChapterIndex,
+  watchMode = false,
+  setChapterCompleted,
+}) => {
   if (!courseInfo) {
     return <div>No Course Info here</div>;
   }
@@ -13,7 +19,19 @@ const CourseDesc = ({ courseInfo, activeChapterIndex, watchMode = false }) => {
       <div className="m-4">
         <h2 className="mt-5 text-[17px] font-semibold">
           {watchMode ? (
-            <span>{courseInfo?.chapter[activeChapterIndex]?.name}</span>
+            <span className="flex justify-between items-center">
+              {courseInfo?.chapter[activeChapterIndex]?.name}
+              <Button
+                variant="outline"
+                onClick={() =>
+                  setChapterCompleted(
+                    courseInfo?.chapter[activeChapterIndex]?.id
+                  )
+                }
+              >
+                Mark Complete
+              </Button>
+            </span>
           ) : (
             <span>New Learning begins</span>
           )}

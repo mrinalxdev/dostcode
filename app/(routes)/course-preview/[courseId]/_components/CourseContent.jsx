@@ -7,8 +7,12 @@ const CourseContent = ({
   isUserAlreadyEnrolled,
   watchMode = false,
   setActiveChapterIndex,
+  completedCourse,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const checkIsChapterCompleted = (chapterId) => {
+    return completedCourse.find(item => item.chapterId == chapterId)
+  };
 
   if (!courseInfo || !courseInfo.chapter) {
     return <div>Loading ....</div>;
@@ -23,7 +27,10 @@ const CourseContent = ({
             className={`p-2 text-[14px] flex justify-between items-center border rounded-sm px-3 m-2 cursor-pointer hover:shadow-xl ease-linear transition-all duration-100 ${
               activeIndex === index && "bg-black text-white"
             }
-            ${isUserAlreadyEnrolled && "hover:bg-black hover:text-white"}`}
+            ${isUserAlreadyEnrolled && "hover:bg-black hover:text-white"}
+            ${
+              checkIsChapterCompleted(item.id) && watchMode 
+            } && "border-green-600 bg-green-200"`}
             onClick={() => {
               watchMode && setActiveChapterIndex(index);
               watchMode && setActiveIndex(index);
