@@ -1,6 +1,5 @@
 "use client";
 import { Lock, Play } from "lucide-react";
-import { comment } from "postcss";
 import React, { useState } from "react";
 
 const CourseContent = ({
@@ -12,11 +11,7 @@ const CourseContent = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const checkIsChapterCompleted = (chapterId) => {
-    if (typeof completedCourse == "undefined") {
-      console.log(completedCourse)
-    } else {
-      return [completedCourse].find(item => item.chapterId == chapterId)
-    }
+    return [completedCourse].find(item => item.chapterId == chapterId)
   };
 
   if (!courseInfo || !courseInfo.chapter) {
