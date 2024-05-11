@@ -5,6 +5,50 @@ const MASTER_URL =
   process.env.NEXT_PUBLIC_HYGRAPH_API_KEY +
   "/master";
 
+const getAllIssue = async () => {
+  const query = gql`
+    query MyQuery{
+      issueLists{
+        id
+        errorName
+        banner{
+          url
+        }
+        issueDetail{
+          name
+        }
+        issueTag
+      }
+    }
+    `
+    const result = await request(MASTER_URL, query);
+    return result;
+}
+
+const getIssueDetails  = async (issueId) => {
+  const query = gql`
+  query MyQuery{
+      issueList(where: { id: "${issueId}" }){
+    errorName
+    issueTag
+    description
+    banner{
+      url
+    }
+    issueDetail{
+      name
+      author
+      activeIssues
+      githubLink
+    }
+  }
+    }
+    `
+
+    const result = await request(MASTER_URL, query)
+    return result
+}
+
 const getAllCourseList = async () => {
   const query = gql`
     query MyQuery {
@@ -247,5 +291,7 @@ export default {
   checkUserEnrolledToCourse,
   getUserEnrolledCourseDetails,
   markChapterCompleted,
-  getUserAllEnrolledCourseList
+  getUserAllEnrolledCourseList,
+  getIssueDetails,
+  getAllIssue
 };
