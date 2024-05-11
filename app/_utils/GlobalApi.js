@@ -175,18 +175,62 @@ const getUserEnrolledCourseDetails = async (id, email) => {
 };
 
 const markChapterCompleted = async (enrollId, chapterId) => {
-  const query = gql`
+  const query =
+    gql`
     mutation MyMutation {
       updateUserEnrollCourse(
         data: {
-          completedCourse: { create: { CompleteCourse: { chapterId: "`+chapterId+`" } } }
+          completedCourse: { create: { CompleteCourse: { chapterId: "` +
+    chapterId +
+    `" } } }
         }
-        where: { id: "`+enrollId+`" }
+        where: { id: "` +
+    enrollId +
+    `" }
       ){
         id
       }
-      publishUserEnrollCourse(where: { id: "`+enrollId+`" }) {
+      publishUserEnrollCourse(where: { id: "` +
+    enrollId +
+    `" }) {
         id
+      }
+    }
+  `;
+
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
+const getUserAllEnrolledCourseList = async () => {
+  const query = gql`
+    query MyQuery {
+      userEnrollCourses(where: { userEmail: "mrinalbitsat@gmail.com" }) {
+        completedCourse {
+          ... on CompleteCourse {
+            id
+            chapterId
+          }
+        }
+        courseId
+        courseList {
+          author
+          free
+          id
+          name
+          slug
+          totalChapters
+          description
+          chapter {
+            ... on Chapter {
+              id
+              name
+            }
+          }
+          banner {
+            url
+          }
+        }
       }
     }
   `;
@@ -202,5 +246,6 @@ export default {
   enrollToCourse,
   checkUserEnrolledToCourse,
   getUserEnrolledCourseDetails,
-  markChapterCompleted
+  markChapterCompleted,
+  getUserAllEnrolledCourseList
 };

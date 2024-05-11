@@ -1,6 +1,5 @@
 "use client";
 import { Lock, Play } from "lucide-react";
-import { comment } from "postcss";
 import React, { useState } from "react";
 
 const CourseContent = ({
@@ -12,11 +11,7 @@ const CourseContent = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const checkIsChapterCompleted = (chapterId) => {
-    if (typeof completedCourse == "undefined") {
-      console.log(completedCourse)
-    } else {
-      return [completedCourse].find(item => item.chapterId == chapterId)
-    }
+    return [completedCourse].find(item => item.chapterId == chapterId)
   };
 
   if (!courseInfo || !courseInfo.chapter) {
@@ -32,7 +27,7 @@ const CourseContent = ({
             className={`p-2 text-[14px] flex justify-between items-center border rounded-sm px-3 m-2 cursor-pointer hover:shadow-xl ease-linear transition-all duration-100 ${activeIndex === index && "bg-black text-white"
               }
             ${isUserAlreadyEnrolled && "hover:bg-black hover:text-white"}
-            ${checkIsChapterCompleted(item.id) && watchMode && "border-green-600 bg-green-200"
+            ${watchMode && checkIsChapterCompleted(item.id) && "border-green-800 bg-green-100 text-black"
               }`}
             onClick={() => {
               watchMode && setActiveChapterIndex(index);

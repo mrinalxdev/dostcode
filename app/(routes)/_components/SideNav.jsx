@@ -20,7 +20,7 @@ const SideNav = () => {
     },
     {
       id: 1,
-      name: "All Courses",
+      name: "All Projects",
       icon: BookOpen,
       path: "/courses",
       auth: true,
