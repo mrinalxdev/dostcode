@@ -16,7 +16,7 @@ const Page = () => {
                     <h2 className="text-gray-400">Explore, Learn and create Solutions for Open Source Challenges</h2>
                 </div>
             </div>
-            <IssueList></IssueList>
+            <IssueList/>
         </div>
     )
 }

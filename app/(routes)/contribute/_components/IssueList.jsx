@@ -1,4 +1,6 @@
-import React from 'react'
+"use client";
+
+import React, { useEffect, useState } from 'react'
 import IssueCard from './IssueCard'
 import {
     Select,
@@ -7,46 +9,21 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import GlobalApi from '@/app/_utils/GlobalApi'
+
 
 const IssueList = () => {
-    const Issue = [
-        {
-            id: 1,
-            name: "Todo app",
-            img: 'https://imgs.search.brave.com/iKKfxPCK27H-OZffkoZVPnqrOMwsY0IkaegAjj7sL3E/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg0L1Nwb3RpZnlf/aWNvbi5zdmc.svg',
-            tags: ['javascript', 'react', 'node js', 'MongoDB', 'Express', 'Prisma'],
-            author: "Utkarsh"
-        },
-        {
-            id: 2,
-            name: "Todo app",
-            img: 'https://imgs.search.brave.com/iKKfxPCK27H-OZffkoZVPnqrOMwsY0IkaegAjj7sL3E/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg0L1Nwb3RpZnlf/aWNvbi5zdmc.svg',
-            tags: ['javascript', 'react', 'node js'],
-            author: "Utkarsh"
-        },
-        {
-            id: 3,
-            name: "Todo app",
-            img: 'https://imgs.search.brave.com/iKKfxPCK27H-OZffkoZVPnqrOMwsY0IkaegAjj7sL3E/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg0L1Nwb3RpZnlf/aWNvbi5zdmc.svg',
-            tags: ['javascript', 'react', 'node js'],
-            author: "Utkarsh"
-        },
-        {
-            id: 4,
-            name: "Todo app",
-            img: 'https://imgs.search.brave.com/iKKfxPCK27H-OZffkoZVPnqrOMwsY0IkaegAjj7sL3E/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg0L1Nwb3RpZnlf/aWNvbi5zdmc.svg',
-            tags: ['javascript', 'react', 'node js'],
-            author: "Utkarsh"
-        },
-        {
-            id: 5,
-            name: "Todo app",
-            img: 'https://imgs.search.brave.com/iKKfxPCK27H-OZffkoZVPnqrOMwsY0IkaegAjj7sL3E/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg0L1Nwb3RpZnlf/aWNvbi5zdmc.svg',
-            tags: ['javascript', 'react', 'node js'],
-            author: "Utkarsh"
-        },
+    const [Issues, setIssues] = useState(null)
 
-    ]
+    const getIssues = async ()=> {
+        const issues = await GlobalApi.getAllIssue()
+        console.log(issues.issueLists)
+        setIssues(issues.issueLists)
+    }
+
+    useEffect(() => {
+        getIssues()
+    }, [])
     return (
         <div className='px-5 py-2 bg-white rounded-lg mt-5 flex flex-col'>
             <div className="flex items-center justify-between">
@@ -66,8 +43,8 @@ const IssueList = () => {
                     </SelectContent>
                 </Select>
             </div>
-            <div className='flex flex-wrap'> 
-                {Issue?.map((item) => {
+            <div className='flex flex-wrap max-[900px]:justify-around max-[400px]:flex-col'>
+                {Issues?.map((item) => {
                     return (<IssueCard item={item} />)
                 })}
             </div>
